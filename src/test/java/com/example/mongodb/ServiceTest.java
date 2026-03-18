@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.mongodb.service.ProductService;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ActiveProfiles("test")
 @SpringBootTest
 public class ServiceTest {
     @Autowired
@@ -20,6 +22,7 @@ public class ServiceTest {
 
     @Test
     public void testService() {
+        productService.deleteAll();
         Manufacturer acme = new Manufacturer("Acme Corp", "USA");
         Product one = new Product(null, "Large Widget", 19.99, Size.LARGE, acme);
         Product two = new Product(null, "Small Widget", 9.99, Size.SMALL, acme);
